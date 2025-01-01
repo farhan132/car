@@ -11,11 +11,11 @@ from car import *
 # Units: meter and second
 
 myCar_SPEED = 15.2
-car1_SPEED = 14
+car1_SPEED = 15
 car2_SPEED = -14.5
 
 myCar_POSITION = 0
-car1_POSITION = 60
+car1_POSITION = 50
 car2_POSITION = 600
 
 
@@ -93,7 +93,7 @@ myCar = car(myCar_SPEED, myCar_POSITION, LEN_CAR, 1)
 car1 = car(car1_SPEED, car1_POSITION, LEN_CAR, 1)
 car2 = car(car2_SPEED, car2_POSITION, LEN_CAR, 0)
 
-Cars = [myCar, car1, car2]
+Cars.extend([myCar, car1, car2])
 
 FRAME = 0
 
