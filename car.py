@@ -7,8 +7,13 @@ class car:
 		self.position = position
 		self.height = height / 2
 		self.lane = lane
+		self.main_lane = lane
 		self.direction = direction
 		self.max_speed = max_speed
+
+		##### INTERNAL USE ######
+		self.hypo_lane_xr = 0
+
 
 	def __eq__(self, other):
 		return (self.position, self.lane) == (other.position, other.lane)
@@ -44,6 +49,14 @@ class car:
 		self.lane = 1 - self.lane
 	def change_direction(self):
 		self.direction *= -1
+	def hypo_lane(self):
+		if self.hypo_lane_xr == 1:
+			self.switch_lane()
+			self.hypo_lane_xr = 0
+			return
+		if self.lane != self.main_lane:
+			self.switch_lane()
+			self.hypo_lane_xr = 1
 
 	def immediate(self, Cars):
 		if self.direction == 1: 

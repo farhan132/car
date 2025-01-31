@@ -10,7 +10,7 @@ Contains All The Global Constants
 FPS = 600
 
 # Maximum Frames
-MAX_FRAME = 5675
+MAX_FRAME = 56750
 
 # Infinite Constant
 INF = 1e18

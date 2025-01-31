@@ -15,11 +15,11 @@ def decision(myCar, time_to_car1, time_to_car2, time_to_car3):
 
     # Safe Pass Time Constant
     
-    # Pass_Constant = 7
+    Pass_Constant = 7
 
-    # if time_to_car3 <= Pass_Constant:
-    #      myCar.accelerate(-ACC_CAR)
-    #      return "Deaccelerate"
+    if -time_to_car3 <= Pass_Constant:
+         myCar.accelerate(-ACC_CAR)
+         return "Deaccelerate"
 
     # Crossover Constant
     # This Variable Will Be Adjusted Via Machine Learning
@@ -37,7 +37,7 @@ def decision(myCar, time_to_car1, time_to_car2, time_to_car3):
         # Already Crossed The Car
         if time_to_car1 < 0:
             myCar.switch_lane()
-            return "Successful Crossing"
+            return "Crossed Back"
 
         # Parrallel To The Car1
         if time_to_car1 == 0:
@@ -54,7 +54,7 @@ def decision(myCar, time_to_car1, time_to_car2, time_to_car3):
         # Not Enough Time To Cross
         if time_to_car2 < Risk_Constant:
             myCar.switch_lane()
-            return "Unsuccessful Crossing"
+            return "Crossed Back"
 
         # Enough Time To Cross
         myCar.accelerate(ACC_CAR)
@@ -124,6 +124,9 @@ def run():
             break
         
         for myCar in player: 
+
+            myCar.hypo_lane()
+
             car1 = myCar.immediate(Cars)
             myCar.switch_lane()
             car2 = myCar.immediate(Cars)
@@ -132,9 +135,13 @@ def run():
             myCar.switch_lane()
             myCar.change_direction()
 
+            myCar.hypo_lane()
+
             time_to_car1 = myCar.time_to_collide(car1)
             time_to_car2 = myCar.time_to_collide(car2)
             time_to_car3 = myCar.time_to_collide(car3)
+
+            #print(car1.speed, car2.speed, car3.speed)
 
             Log.append(decision(myCar, time_to_car1, time_to_car2, time_to_car3))
 

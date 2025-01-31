@@ -17,7 +17,7 @@ car2_SPEED = 14.5
 
 myCar_POSITION = 0
 car1_POSITION = 50
-car2_POSITION = 420
+car2_POSITION = 220
 
 car1_ACC = 0.04 
 car1_DEACC = 0.01
