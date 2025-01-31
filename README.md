@@ -13,6 +13,7 @@ python3 simulator.py
 - **Constant.py**: Contains all the constants.
 - **Car.py**: Contains the `Car` class.
 - **Simulator.py**: Implements the decision function and simulator for time to collision.
+- **Complex_simulator.py**: Implements the decision function and simulator for time to collision for complex cases.
 
 ## Scenario Description
 The simulation considers the following scenario:
@@ -38,3 +39,7 @@ car2_POSITION = 120
 ```
 
 Adjust these values as needed to simulate different scenarios.
+
+# Complex Simulation
+Details to added
+
