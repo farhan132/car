@@ -145,10 +145,16 @@ def run():
 
             Log.append(decision(myCar, time_to_car1, time_to_car2, time_to_car3))
 
+        
+        data_cars = []
 
+        for cars in Cars[:-4]:
+            data_cars.append((cars.position, cars.lane))
 
         for cars in Cars:
             cars.update()
+        
+        Simulation_Log.append(data_cars)
 
     print(attempt_success)
 
@@ -156,3 +162,76 @@ def run():
 
 
 run()
+
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import matplotlib.patches as patches
+import numpy as np
+import constant  # Ensure constant.py defines Simulation_Log
+
+# Car properties.
+car_length = 4.7  # Length of each car in meters.
+car_height = 0.1  # Visual height of the car.
+
+# Retrieve the simulation log.
+simulation_log = constant.Simulation_Log
+
+# Determine number of cars from the first time step.
+n_cars = len(simulation_log[0]) if simulation_log else 0
+
+# Create a colormap for unique car colors.
+cmap = plt.get_cmap('tab10', n_cars)
+colors = [cmap(i) for i in range(n_cars)]
+
+# Create the figure and axis.
+fig, ax = plt.subplots(figsize=(10, 3))
+
+# Create rectangle patches for each car using the starting frame.
+car_rects = []
+xs = []
+if simulation_log:
+    start_frame = simulation_log[0]
+    for j, (pos, lane) in enumerate(start_frame):
+        # The logged position is assumed to be the front of the car.
+        x = pos - car_length  # Left edge of the car.
+        y = lane - car_height / 2  # Center the car vertically in its lane.
+        rect = patches.Rectangle((x, y), car_length, car_height, color=colors[j])
+        ax.add_patch(rect)
+        car_rects.append(rect)
+        xs.extend([x, pos])
+else:
+    start_frame = []
+
+# Set y-axis limits to cover the two lanes.
+ax.set_ylim(-0.5, 1.5)
+
+# Compute fixed x-axis limits from the starting frame.
+if xs:
+    min_x = min(xs)
+    max_x = max(xs)
+    margin = (max_x - min_x) * 0.1 if (max_x - min_x) > 0 else 1
+    ax.set_xlim(min_x - margin, max_x + margin)
+else:
+    ax.set_xlim(0, 10)
+
+# Animation update function.
+def animate(i):
+    time_step = simulation_log[i]
+    for j, (pos, lane) in enumerate(time_step):
+        # Update the rectangle's position.
+        x = pos - car_length
+        y = lane - car_height / 2
+        car_rects[j].set_xy((x, y))
+    ax.set_title(f"Time Step: {i}")
+    return car_rects
+
+# Create the animation; note blit is disabled.
+ani = animation.FuncAnimation(
+    fig, animate, frames=len(simulation_log),
+    interval=2, blit=False, repeat=True
+)
+
+ax.set_xlabel("Position (meters)")
+ax.set_ylabel("Lane")
+plt.tight_layout()
+plt.show()

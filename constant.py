@@ -7,10 +7,10 @@ Contains All The Global Constants
 # Position: meters
 
 # Calculation Frame Count Per Second
-FPS = 600
+FPS = 300
 
 # Maximum Frames
-MAX_FRAME = 56750
+MAX_FRAME = 5675
 
 # Infinite Constant
 INF = 1e18
@@ -32,3 +32,4 @@ EX_TIME = 1 / FPS
 
 # Log
 Log = []
+Simulation_Log = []
