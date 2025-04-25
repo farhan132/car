@@ -145,16 +145,17 @@ def run():
 
             Log.append(decision(myCar, time_to_car1, time_to_car2, time_to_car3))
 
-        
-        data_cars = []
 
-        for cars in Cars[:-4]:
-            data_cars.append((cars.position, cars.lane))
 
         for cars in Cars:
             cars.update()
         
-        Simulation_Log.append(data_cars)
+        tmp = []
+
+        for cars in Cars[:-4]:
+            tmp.append([cars.position, cars.lane])
+
+        Simulation_Log.append(tmp)
 
     print(attempt_success)
 
@@ -163,6 +164,7 @@ def run():
 
 run()
 
+
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.patches as patches
@@ -170,8 +172,8 @@ import numpy as np
 import constant  # Ensure constant.py defines Simulation_Log
 
 # Car properties.
-car_length = 4.7  # Length of each car in meters.
-car_height = 0.1  # Visual height of the car.
+car_length = 4.7 # Length of each car in meters.
+car_height = 0.06  # Visual height of the car.
 
 # Retrieve the simulation log.
 simulation_log = constant.Simulation_Log
@@ -228,7 +230,7 @@ def animate(i):
 # Create the animation; note blit is disabled.
 ani = animation.FuncAnimation(
     fig, animate, frames=len(simulation_log),
-    interval=2, blit=False, repeat=True
+    interval=3, blit=False, repeat=True
 )
 
 ax.set_xlabel("Position (meters)")
