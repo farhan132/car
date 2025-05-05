@@ -1,40 +1,75 @@
-# Car
+# Car Simulation
 
-Tests time to collision for autonomous cars.
+**Tests time to collision (TTC) for autonomous cars and simulates lane-crossing decisions.**
 
-## How to Run
-To run the simulation, use the following command:
-```bash
+## Features
+- Basic simulation computing TTC and lane-switch decisions.
+- Advanced simulation with logging and matplotlib animation.
+- Optional GUI input for car parameters via PyQt5.
+
+## Requirements
+- Python 3.7 or higher
+- Python packages:
+  - matplotlib
+  - numpy
+  - PyQt5
+
+Install dependencies:
+```
+pip install matplotlib numpy PyQt5
+```
+
+## Installation
+1. Clone the repository:
+   ```
+   git clone https://github.com/farhan132/car.git
+   cd car
+   ```
+
+## Usage
+
+### CLI Simulation
+Run the basic simulator:
+```
 python3 simulator.py
 ```
 
-## File Descriptions
-- **Template.py**: Contains all the general functions.
-- **Constant.py**: Contains all the constants.
-- **Car.py**: Contains the `Car` class.
-- **Simulator.py**: Implements the decision function and simulator for time to collision.
-
-## Scenario Description
-The simulation considers the following scenario:
-
-- **myCar** is in lane 1, traveling in the same direction as **car1**.
-- **car2** is in lane 0, traveling in the opposite direction of **myCar**.
-
-### Speed and Position Configuration
-The speed and position of the cars can be edited in the top section of `simulator.py` under the following block:
-
-```python
-############## SPEED and POSITIONS ############## 
-
-# Units: meter and second
-
-myCar_SPEED = 15.2
-car1_SPEED = 14
-car2_SPEED = -14.5
-
-myCar_POSITION = 0
-car1_POSITION = 60
-car2_POSITION = 120
+### Complex Simulation with Animation
+Run the advanced simulator:
+```
+python3 complex_simulator.py
 ```
 
-Adjust these values as needed to simulate different scenarios.
+### GUI Input (Optional)
+To use the PyQt5-based car input dialog:
+1. In `complex_simulator.py`, replace `build_cars()` with `Cars.extend(INPUT2())`.
+2. Ensure PyQt5 is installed.
+3. Run `complex_simulator.py`.
+
+## Configuration
+Edit speed and position parameters at the top of `simulator.py` and `complex_simulator.py`:
+```python
+# Example in simulator.py
+myCar_SPEED = 15.2
+car1_SPEED = 15
+car2_SPEED = 14.5
+```
+
+## File Structure
+- `car.py`               : Defines the `car` class and collision logic.
+- `constant.py`          : Global constants and simulation logs.
+- `template.py`          : Utility functions, logging, input parsing, and GUI components.
+- `simulator.py`         : Basic TTC simulation with lane-switch decisions.
+- `complex_simulator.py` : Advanced simulation with logging and animation.
+- `input.txt`            : Sample input data for `simulator.py`.
+- `.vscode/`, `__pycache__/`: Configuration and cache directories.
+
+## Logging and Output
+- Logs are printed to the console.
+- Use `process_log(Log)` to summarize events and total simulation time.
+
+## Contributing
+Feel free to submit issues and pull requests.
+
+## Author
+farhan132 (https://github.com/farhan132)
