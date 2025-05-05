@@ -47,7 +47,7 @@ To use the PyQt5-based car input dialog:
 3. Run `complex_simulator.py`.
 
 ## Configuration
-Edit speed and position parameters at the top of `simulator.py` and `complex_simulator.py`:
+Edit speed and position parameters at the top of `simulator.py`:
 ```python
 # Example in simulator.py
 myCar_SPEED = 15.2
@@ -55,13 +55,16 @@ car1_SPEED = 15
 car2_SPEED = 14.5
 ```
 
+Edit `input.txt` for the configuring `complex_simulator.py` or you could use GUI input mentioned above.
+
+
 ## File Structure
 - `car.py`               : Defines the `car` class and collision logic.
 - `constant.py`          : Global constants and simulation logs.
 - `template.py`          : Utility functions, logging, input parsing, and GUI components.
 - `simulator.py`         : Basic TTC simulation with lane-switch decisions.
 - `complex_simulator.py` : Advanced simulation with logging and animation.
-- `input.txt`            : Sample input data for `simulator.py`.
+- `input.txt`            : Sample input data for `complex_simulator.py`.
 - `.vscode/`, `__pycache__/`: Configuration and cache directories.
 
 ## Logging and Output
